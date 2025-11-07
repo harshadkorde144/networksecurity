@@ -32,3 +32,31 @@ The main aim of this week is to establish a small internal network using OPNsens
 
 **Summary:**  
 By the end of Week 1, the internal network is functional. OPNsense is running as the LAN gateway and DHCP server, and Kali Linux is able to communicate within the network. This setup forms the foundation for all the upcoming lab exercises.
+
+
+# Week 2 — Network Scanning & Mapping (Nmap)
+
+## Objective
+Perform network discovery and service enumeration on the lab's internal network to build a baseline of live hosts, open ports and running services. These results will be used later for IDS/firewall testing and documentation.
+
+---
+
+## Environment
+- **OPNsense (LAN gateway):** 192.168.1.1  
+- **Kali Linux (scanner):** 192.168.1.10  
+- **Subnet:** 192.168.1.0/24  
+- **Tool:** nmap (Kali Linux)
+
+---
+
+## Exact commands executed
+Run these on the Kali VM. Outputs were saved under `Week2/scans/`.
+
+```bash
+# 1) Discover live hosts on the LAN
+sudo nmap -sn 192.168.1.0/24 -oN Week2/scans/lan_ping_scan.nmap
+
+# 2) Enumerate services and versions on discovered hosts (save text + xml + gnmap)
+sudo nmap -sV 192.168.1.1 192.168.1.10 -oA Week2/scans/lan_service_scan
+
+
