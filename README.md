@@ -102,37 +102,34 @@ In this week, the goal was to configure firewall security rules in **OPNsense** 
 - Used **Nmap** from Kali to test firewall detection and filtering:
   ```bash
   sudo nmap 192.168.1.1
-Verified open ports (22, 53, 443) and confirmed blocked access as per rules.
+-Verified open ports (22, 53, 443) and confirmed blocked access as per rules.
 
-📷 Screenshot: 5_nmap_scan.png
+📷 **Screenshot:** `5_nmap_scan.png`
 
-5. Checked Firewall Logs
+### 5. Checked Firewall Logs
 
-Viewed logs under Firewall → Log Files → Live View.
+  1. Viewed logs under Firewall → Log Files → Live View.
 
-Confirmed blocked traffic attempts and verified rule actions.
+  2. Confirmed blocked traffic attempts and verified rule actions.
 
-📷 Screenshot: 6_firewall_logs.png
+📷 **Screenshot:** `6_firewall_logs.png`
 
-6. Verified Network Connectivity
+### 6. Verified Network Connectivity
 
 Checked Interfaces → Overview to confirm:
-
+ ```bash
 LAN: 192.168.1.1/24
 
 Kali VM: 192.168.1.10
-
+```
 Both interfaces were active and communicating properly.
 
-📷 Screenshot: 7_interfaces.png
+📷 **Screenshot:** `7_interfaces.png`
 
-🧠 Learning Outcomes
+###🧠 Learning Outcomes
 
-Understood creation and use of aliases in OPNsense.
-
-Learned how to apply and test firewall filtering rules.
-
-Practiced network scanning and log verification.
-
-Gained hands-on experience in blocking suspicious traffic in a virtual lab.
+- Understood creation and use of aliases in OPNsense.
+- Learned how to apply and test firewall filtering rules.
+- Practiced network scanning and log verification.
+- Gained hands-on experience in blocking suspicious traffic in a virtual lab.
 
