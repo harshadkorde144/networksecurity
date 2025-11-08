@@ -59,9 +59,9 @@ sudo nmap -sn 192.168.1.0/24 -oN Week2/scans/lan_ping_scan.nmap
 # 2) Enumerate services and versions on discovered hosts (save text + xml + gnmap)
 sudo nmap -sV 192.168.1.1 192.168.1.10 -oA Week2/scans/lan_service_scan 
 ```
-# 🔥 Week 3 – Firewall Configuration & Traffic Filtering (OPNsense)
+#  Week 3 – Firewall Configuration & Traffic Filtering (OPNsense)
 
-## 🎯 Objective
+## Objective
 In this week, the goal was to configure firewall security rules in **OPNsense** to monitor and block malicious traffic, set up network aliases, and test firewall protection using **Kali Linux**.
 
 ---
