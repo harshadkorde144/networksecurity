@@ -57,6 +57,82 @@ Run these on the Kali VM. Outputs were saved under `Week2/scans/`.
 sudo nmap -sn 192.168.1.0/24 -oN Week2/scans/lan_ping_scan.nmap
 
 # 2) Enumerate services and versions on discovered hosts (save text + xml + gnmap)
-sudo nmap -sV 192.168.1.1 192.168.1.10 -oA Week2/scans/lan_service_scan
+sudo nmap -sV 192.168.1.1 192.168.1.10 -oA Week2/scans/lan_service_scan 
+```
+# 🔥 Week 3 – Firewall Configuration & Traffic Filtering (OPNsense)
 
+## 🎯 Objective
+In this week, the goal was to configure firewall security rules in **OPNsense** to monitor and block malicious traffic, set up network aliases, and test firewall protection using **Kali Linux**.
+
+---
+
+## 🧩 Steps Performed
+
+### 1. OPNsense Dashboard Overview
+- Verified that both LAN (`192.168.1.1/24`) and WAN (`10.0.3.x`) interfaces were configured correctly.
+- Ensured LAN connection with the Kali VM using internal network mode.
+
+📷 **Screenshot:** `1_dashboard.png`
+
+---
+
+### 2. Created Aliases
+- Added aliases to simplify firewall rule management:
+  - **SUS_IPS:** Suspicious host IPs (e.g., `10.0.2.99`)
+  - **SUS_PORTS:** Common suspicious ports (`23, 445, 3389`)
+  - **Internal_LAN:** Internal network range (`192.168.1.0/24`)
+
+📷 **Screenshot:** `2_aliases.png`
+
+---
+
+### 3. Configured Firewall Rules (LAN)
+- Added rules to **block** suspicious hosts and ports.
+- Rule Order:
+  1. Block traffic from `SUS_IPS` to `LAN net`
+  2. Block suspicious ports (`SUS_PORTS`)
+  3. Allow remaining LAN to any (default rule)
+
+📷 **Screenshot:** `3_rules_lan.png`  
+📷 **Screenshot:** `4_rule_edit.png`
+
+---
+
+### 4. Performed Network Scanning
+- Used **Nmap** from Kali to test firewall detection and filtering:
+  ```bash
+  sudo nmap 192.168.1.1
+Verified open ports (22, 53, 443) and confirmed blocked access as per rules.
+
+📷 Screenshot: 5_nmap_scan.png
+
+5. Checked Firewall Logs
+
+Viewed logs under Firewall → Log Files → Live View.
+
+Confirmed blocked traffic attempts and verified rule actions.
+
+📷 Screenshot: 6_firewall_logs.png
+
+6. Verified Network Connectivity
+
+Checked Interfaces → Overview to confirm:
+
+LAN: 192.168.1.1/24
+
+Kali VM: 192.168.1.10
+
+Both interfaces were active and communicating properly.
+
+📷 Screenshot: 7_interfaces.png
+
+🧠 Learning Outcomes
+
+Understood creation and use of aliases in OPNsense.
+
+Learned how to apply and test firewall filtering rules.
+
+Practiced network scanning and log verification.
+
+Gained hands-on experience in blocking suspicious traffic in a virtual lab.
 
