@@ -106,6 +106,8 @@ In this week, the goal was to configure firewall security rules in **OPNsense** 
 
 📷 **Screenshot:** `5_nmap_scan.png`
 
+---
+
 ### 5. Checked Firewall Logs
 
   1. Viewed logs under Firewall → Log Files → Live View.
@@ -113,6 +115,8 @@ In this week, the goal was to configure firewall security rules in **OPNsense** 
   2. Confirmed blocked traffic attempts and verified rule actions.
 
 📷 **Screenshot:** `6_firewall_logs.png`
+
+---
 
 ### 6. Verified Network Connectivity
 
@@ -126,7 +130,9 @@ Both interfaces were active and communicating properly.
 
 📷 **Screenshot:** `7_interfaces.png`
 
-###🧠 Learning Outcomes
+---
+
+### 🧠 Learning Outcomes
 
 - Understood creation and use of aliases in OPNsense.
 - Learned how to apply and test firewall filtering rules.
