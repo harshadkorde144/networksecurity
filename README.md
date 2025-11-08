@@ -139,3 +139,123 @@ Both interfaces were active and communicating properly.
 - Practiced network scanning and log verification.
 - Gained hands-on experience in blocking suspicious traffic in a virtual lab.
 
+Week 4: Wireshark Network Traffic Analysis
+Experiment Objective
+Use Wireshark to understand the difference between normal network traffic and malicious/suspicious traffic and analyze OPNsense firewall behavior.
+
+Virtual Machines Used
+VM Name	Role	Network Interface	IP Address
+Kali Linux	Attacker/Analyst	eth0	192.168.1.10
+OPNsense	Firewall/Target	LAN Interface	192.168.1.1
+Network Configuration
+LAN Subnet: 192.168.1.0/24
+
+OPNsense LAN IP: 192.168.1.1
+
+Kali Linux IP: 192.168.1.10 (DHCP assigned)
+
+Target IP for Scanning: 192.168.1.1 (OPNsense firewall)
+
+Step-by-Step Procedure
+Step 1: Wireshark Initialization
+Open Wireshark in Kali Linux with root permissions
+
+Select active network interface (eth0)
+
+Step 2: Capture Configuration
+Go to Capture Options
+
+Select Interface: eth0
+
+Enable Promiscuous Mode ✅
+
+Click Start Capturing 🔴
+
+Step 3: Capture Normal Traffic
+Commands Executed:
+
+text
+ping 8.8.8.8
+Open browser → google.com
+
+Observed in Wireshark:
+
+ICMP packets (ping)
+
+DNS queries
+
+TCP handshake (SYN, ACK)
+
+HTTP/HTTPS requests
+
+Screenshot: normal_traffic.png
+
+Step 4: Generate Malicious/Suspicious Traffic (Attack Simulation)
+NMAP Scan Command:
+
+text
+sudo nmap 192.168.1.1
+Observed in Wireshark:
+
+SYN flood like repeated TCP SYN packets
+
+ICMP echo requests
+
+Different port scans (22, 80, 443, etc.)
+
+Screenshot: malicious_traffic.png
+
+Step 5: Analyze the Captures
+Wireshark Display Filters:
+
+Normal traffic:
+
+text
+http || icmp
+Suspicious traffic:
+
+text
+tcp.flags.syn==1 && tcp.flags.ack==0
+Comparison Table:
+
+Type	Source	Destination	Protocol	Notes
+Normal	192.168.1.10	8.8.8.8	ICMP	Ping
+Malicious	192.168.1.10	192.168.1.1	TCP	Port Scan
+Screenshot: traffic_analysis.png
+
+Step 6: Save and Export
+Stop capturing (🔴)
+
+Save as → week4_capture.pcapng
+
+Upload this file to GitHub for documentation
+
+Screenshot List (GitHub Folder /Week4)
+text
+Week4/
+ ├── 1_wireshark_start.png
+ ├── 2_normal_ping_testing.png
+ ├── 3_normal_traffic.png
+ ├── 4_sending_malicious_traffic.png
+ ├── 5_malicious_traffic.png
+ ├── traffic_analysis.png
+ └── week4_capture.pcapng
+Key Observations
+Normal Traffic: Regular patterns, established connections, expected protocols
+
+Malicious Traffic: Multiple rapid connection attempts, port scanning patterns, unusual packet flags
+
+Firewall Response: OPNsense shows different behavior on suspicious traffic
+
+Precautions
+This is for educational purposes only
+
+Test only on your own network
+
+Maintain legal boundaries
+
+Expected Results
+Wireshark analysis should show clear differences between normal and malicious traffic, which will help improve understanding of network security monitoring.
+
+Note: This is an important step in learning practical network security and intrusion detection.
+
