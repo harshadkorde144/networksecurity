@@ -259,3 +259,248 @@ Wireshark analysis should show clear differences between normal and malicious tr
 
 Note: This is an important step in learning practical network security and intrusion detection.
 
+
+
+
+✅ 1) Snort Start Screenshot (Snort चलाते समय)
+Command (Terminal 1):
+sudo snort -c /etc/snort/snort.lua -i eth0 -A alert_fast
+
+Screenshot में क्या दिखना चाहिए:
+
+✔ Snort modules load होते हुए
+✔ "Commencing packet processing"
+✔ नीचे alerts live आते हुए
+
+📸 File name suggestion:
+1_snort_running.png
+
+✅ 2) ICMP Ping Attack Test (Snort Alert: ICMP Ping Detected)
+Command (Terminal 2):
+ping -c 3 192.168.1.1
+
+Expected Snort alert:
+[**] [1:100001:1] ICMP Ping Detected
+
+
+📸 Output Screenshots:
+
+Terminal 2 में ping का output
+→ 2_ping_test_output.png
+
+Terminal 1 में Snort alert दिखाई दे
+→ 3_snort_icmp_alert.png
+
+✅ 3) Nmap SYN Scan Test (Snort Alert: Possible Nmap SYN Scan)
+Command (Terminal 2):
+sudo nmap -sS 192.168.1.1
+
+Expected Snort alert:
+[**] [1:100002:1] Possible Nmap SYN Scan
+
+
+📸 Output Screenshots:
+
+Nmap scan terminal output
+→ 4_nmap_scan_output.png
+
+Snort terminal showing SYN Scan alert
+→ 5_snort_syn_alert.png
+
+📦 4) local.rules File Screenshot
+Command:
+sudo nano /etc/snort/rules/local.rules
+
+
+📸 Screenshot name
+6_local_rules_file.png
+
+📦 5) Snort Config Test Screenshot
+Command:
+sudo snort -T -c /etc/snort/snort.lua
+
+
+Expected output:
+
+Snort successfully validated the configuration
+
+
+📸 Screenshot name
+7_snort_validation.png
+
+📝 Summary for Week 5 (You will need these points in your README):
+✔ Snort Installed
+✔ Custom Detection Rules Created
+
+ICMP ping rule
+
+Nmap SYN scan rule
+
+✔ Alerts Captured
+
+ICMP alert
+
+SYN scan alert
+
+❓अगर चाहो तो मैं अभी Week 5 का पूरा ready-made README.md भी बना दूँ।
+
+बस बोल दो!
+
+You said:
+yes
+ChatGPT said:
+
+Great Harshad! नीचे तुम्हारे Week-5 Snort IDS Practical के लिए पूरा तैयार किया हुआ README.md दे रहा हूँ —
+इसको तुम सीधे GitHub पर copy-paste कर सकते हो।
+(Formatting, headings, explanation सब बिल्कुल perfect है.)
+
+✅ WEEK-5 – Intrusion Detection System using Snort (README.md Complete)
+# WEEK-5 – Intrusion Detection System using Snort
+
+This practical demonstrates how to install, configure, and run **Snort IDS** to detect suspicious activities such as **ICMP ping probes** and **Nmap SYN scans**.  
+We created custom rules in `local.rules` and verified alerts in real time.
+
+---
+
+## 📌 1. Environment Setup
+
+### **Snort Version**
+Snort++ 3.9.x running on Kali Linux (VirtualBox NAT/Bridge).
+
+### **Network Interface**
+Snort is listening on:
+
+
+eth0 – 192.168.1.10/24
+
+
+---
+
+## 📌 2. Snort Configuration Changes
+
+### Updated `/etc/snort/snort.lua`
+
+RULE_PATH = "/etc/snort/rules"
+
+ips =
+{
+    variables = default_variables,
+
+    rules =
+    {
+        RULE_PATH .. "/local.rules"
+    }
+}
+
+
+✔ This ensures Snort loads our custom rules.
+
+📌 3. Custom Rules (local.rules)
+
+Path:
+
+/etc/snort/rules/local.rules
+
+Added Rules:
+alert icmp any any -> any any (
+    msg:"ICMP Ping Detected";
+    sid:100001;
+    gid:1;
+)
+
+alert tcp any any -> any any (
+    msg:"Possible Nmap SYN Scan";
+    flags:S;
+    sid:100002;
+    gid:1;
+)
+
+
+✔ First rule detects ICMP echo requests
+✔ Second rule detects TCP SYN scans (used by Nmap)
+
+📌 4. Validate Snort Configuration
+
+Command:
+
+sudo snort -T -c /etc/snort/snort.lua
+
+
+Expected Output:
+
+Snort successfully validated the configuration
+
+📌 5. Running Snort in IDS Mode
+
+Command:
+
+sudo snort -c /etc/snort/snort.lua -i eth0 -A alert_fast
+
+
+✔ Snort starts listening on eth0
+✔ Shows “Commencing packet processing”
+
+📌 6. Attack Simulation & Alerts
+✅ A) ICMP Ping Test
+
+Command:
+
+ping -c 3 192.168.1.1
+
+
+Expected Snort Alert:
+
+[**] [1:100001:1] ICMP Ping Detected
+
+
+📸 Screenshot:
+
+Ping output
+
+Snort alert window
+
+✅ B) Nmap SYN Scan Test
+
+Command:
+
+sudo nmap -sS 192.168.1.1
+
+
+Expected Snort Alert:
+
+[**] [1:100002:1] Possible Nmap SYN Scan
+
+
+📸 Screenshot:
+
+Nmap output
+
+Snort alert window
+
+📸 7. Screenshots Required (for report)
+
+Snort running (snort -c … -A alert_fast)
+
+Ping test output
+
+Snort ICMP alert popup
+
+Nmap SYN scan output
+
+Snort SYN scan alert
+
+local.rules file screenshot
+
+Snort validation (snort -T) screenshot
+
+📌 8. Conclusion
+
+In this practical we:
+
+✔ Installed and configured Snort IDS
+✔ Created custom detection rules
+✔ Detected ICMP ping attempts
+✔ Detected Nmap SYN scans
+✔ Verified alerts in real-time
+
+Snort successfully identified suspicious activity using signature-based detection, demonstrating its usefulness for network security monitoring.
