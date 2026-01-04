@@ -504,3 +504,113 @@ In this practical we:
 ✔ Verified alerts in real-time
 
 Snort successfully identified suspicious activity using signature-based detection, demonstrating its usefulness for network security monitoring.
+
+
+📘 Week 8 – SIEM Configuration and Alerting (Splunk)
+📌 Objective
+
+The objective of Week 8 was to deploy a SIEM solution, ingest system logs, configure basic security alerts, and verify alert functionality using real security events.
+
+🖥️ Environment Details
+
+Host OS: Windows
+
+SIEM Tool: Splunk Enterprise
+
+Deployment Type: Single Instance
+
+Log Source: Local Windows Event Logs
+
+Index Used: Default (main)
+
+⚙️ Tasks Performed
+1️⃣ Splunk Installation
+
+Installed Splunk Enterprise using Windows .msi installer.
+
+Configured Splunk as a Single Instance deployment.
+
+Verified Splunk Web interface at:
+
+http://localhost:8000
+
+2️⃣ Log Ingestion Configuration
+
+Configured Local Event Logs as data source.
+
+Enabled ingestion of:
+
+Security logs
+
+System logs
+
+Application logs
+
+Verified successful indexing using search:
+
+index=* | head 5
+
+3️⃣ Security Event Verification
+
+Generated real security events using failed login attempts.
+
+Verified detection of failed authentication events using:
+
+index=* EventCode=4625
+
+
+Confirmed that Windows Security events were successfully collected and searchable.
+
+4️⃣ Alert Rule Creation
+
+Created a security alert with the following details:
+
+Alert Name: Multiple Failed Login Attempts
+
+Alert Type: Scheduled
+
+Execution Frequency: Hourly
+
+Trigger Condition: Number of results > 0
+
+Action: Add to Triggered Alerts
+
+Alert designed to detect potential brute-force login attempts.
+
+5️⃣ Alert Validation
+
+Alert logic validated by:
+
+Generating failed login events
+
+Verifying search results for EventCode 4625
+
+Alert configuration confirmed as active and enabled.
+
+📸 Documentation & Evidence
+
+The following screenshots were captured for submission:
+
+Splunk Dashboard (running state)
+
+Log ingestion proof (index=*)
+
+Windows Security log detection
+
+Failed login event detection (EventCode=4625)
+
+Alert configuration screen
+
+✅ Outcome
+
+Splunk SIEM was successfully deployed and configured.
+
+System and security logs were ingested correctly.
+
+Failed login attempts were detected in real time.
+
+A functional security alert was created and validated.
+
+🧠 Conclusion
+
+Week 8 successfully demonstrated SIEM deployment, log ingestion, and alerting capabilities using Splunk. The setup provides centralized visibility into security events and forms the foundation for malware detection and incident response tasks planned in subsequent weeks.
