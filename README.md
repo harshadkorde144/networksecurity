@@ -614,3 +614,117 @@ A functional security alert was created and validated.
 🧠 Conclusion
 
 Week 8 successfully demonstrated SIEM deployment, log ingestion, and alerting capabilities using Splunk. The setup provides centralized visibility into security events and forms the foundation for malware detection and incident response tasks planned in subsequent weeks.
+
+
+📘 Week 9 – Malware Simulation, Detection & Incident Response
+📌 Objective
+
+The objective of Week 9 was to simulate malware-like suspicious activities in a controlled environment, detect them using a SIEM solution, and document the incident detection and response workflow.
+
+🖥️ Environment Details
+
+Host OS: Windows
+
+SIEM Tool: Splunk Enterprise
+
+Deployment Type: Single Instance
+
+Log Source: Windows Security Event Logs
+
+Index Used: Default (main)
+
+⚙️ Tasks Performed
+1️⃣ Malware-Like Activity Simulation
+
+To simulate malware persistence behavior, an unauthorized local user account was created on the system.
+
+Command executed (CMD – Run as Administrator):
+
+net user maltest01 Test@123 /add
+
+
+This action generated a Windows Security Event indicating new user creation.
+
+2️⃣ Detection of Suspicious Activity
+
+The simulated activity was detected in Splunk using Windows Security logs.
+
+Search command used:
+
+index=* EventCode=4720
+
+
+EventCode 4720 confirms a new user account creation.
+
+Logs were successfully ingested and correlated by the SIEM.
+
+3️⃣ Additional Security Indicator (Failed Login Attempts)
+
+To demonstrate authentication-related suspicious activity, multiple failed login attempts were generated.
+
+Search command used:
+
+index=* EventCode=4625
+
+
+EventCode 4625 indicates failed authentication attempts.
+
+This activity is commonly associated with brute-force attacks.
+
+4️⃣ Malware Detection Alert Configuration
+
+An alert was configured in Splunk to automatically detect unauthorized user creation.
+
+Alert Details:
+
+Alert Name: Unauthorized User Creation Detected
+
+Alert Type: Scheduled
+
+Execution Frequency: Hourly
+
+Trigger Condition: Number of results > 0
+
+Action: Add to Triggered Alerts
+
+This alert helps in identifying malware persistence techniques in real time.
+
+5️⃣ Incident Response Workflow
+
+Upon detection of suspicious activity:
+
+Logs were reviewed to identify the source and time of the event.
+
+The unauthorized account was identified as suspicious.
+
+Authentication logs were monitored for further anomalies.
+
+The system was marked for continued monitoring and hardening.
+
+📸 Documentation & Evidence
+
+The following screenshots were captured as evidence:
+
+Command prompt showing unauthorized user creation
+
+Splunk detection of EventCode 4720
+
+Splunk detection of EventCode 4625
+
+Malware alert configuration screen
+
+(Optional) Triggered Alerts view
+
+✅ Outcome
+
+Malware-like activity was successfully simulated.
+
+Suspicious behavior was detected using Splunk SIEM.
+
+A working alert was configured for automated detection.
+
+Incident response steps were documented.
+
+🧠 Conclusion
+
+Week 9 successfully demonstrated malware simulation, detection, and alerting using Splunk SIEM. This phase validated the effectiveness of centralized log analysis and alert-based incident detection, preparing the environment for forensic analysis and further security assessment.
