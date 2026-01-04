@@ -849,3 +849,130 @@ Attack sequence reconstructed
 Investigation report prepared
 
 Foundation established for final assessment and comparison
+
+
+📘 Week 11 – Re-assessment, Comparison & Final Evaluation
+📌 Objective
+
+The objective of Week 11 was to perform a re-assessment of the secured environment, re-execute previously simulated attack scenarios, compare the system behavior before and after security implementation, and evaluate the overall effectiveness of the deployed IDS and SIEM solutions.
+
+🖥️ Environment Details
+
+Host OS: Windows
+
+Attacker Simulation: Kali Linux
+
+Firewall / Network Security: OPNsense
+
+IDS: Snort
+
+SIEM Tool: Splunk Enterprise
+
+Deployment Type: Single Instance
+
+Log Source: Windows Security Event Logs
+
+Index Used: Default (main)
+
+⚙️ Tasks Performed
+1️⃣ Re-assessment of Failed Login Detection
+
+Previously simulated authentication attacks were re-executed to verify detection after security controls were in place.
+
+Verification command used:
+
+index=* EventCode=4625
+
+
+Failed login attempts were successfully detected.
+
+Events were logged and available for analysis in the SIEM.
+
+2️⃣ Re-assessment of Unauthorized User Creation
+
+Unauthorized user creation was re-simulated to confirm detection and monitoring effectiveness.
+
+Command executed (CMD – Run as Administrator):
+
+net user reassess01 Test@123 /add
+
+
+Verification command used:
+
+index=* EventCode=4720
+
+
+EventCode 4720 confirmed detection of new user account creation.
+
+Logs were successfully indexed and searchable.
+
+3️⃣ Alert Status Verification
+
+Previously configured alerts were reviewed to ensure they remained active and functional.
+
+Multiple Failed Login Attempts – Enabled
+
+Unauthorized User Creation Detected – Enabled
+
+Alerts were confirmed to be properly configured and ready for incident detection.
+
+4️⃣ Before vs After Security Comparison
+Parameter	Before Security Implementation	After Security Implementation
+Monitoring	No centralized monitoring	Centralized SIEM monitoring
+IDS	Not deployed	Snort IDS active
+SIEM	Not available	Splunk & Wazuh deployed
+Attack Visibility	Attacks unnoticed	Attacks detected & logged
+Alerts	Not configured	Automated alerts enabled
+Incident Response	Manual / None	Alert-driven response
+5️⃣ Final Event Analysis
+
+Overall event statistics were reviewed to validate continuous monitoring.
+
+Search commands used:
+
+index=* (EventCode=4625 OR EventCode=4720)
+
+index=* | stats count by EventCode
+
+
+Security events were consistently logged.
+
+Monitoring and detection mechanisms remained stable.
+
+📸 Documentation & Evidence
+
+The following screenshots were captured for submission:
+
+Re-assessment failed login detection (EventCode 4625)
+
+Re-assessment unauthorized user creation (EventCode 4720)
+
+Active alerts status page
+
+Final event statistics and analysis
+
+🔍 Final Assessment
+
+Re-assessment confirmed that previously simulated attacks are now detected and logged.
+
+Alerts remain active and correctly configured.
+
+Comparison results demonstrate a significant improvement in security visibility and response capability.
+
+The deployed IDS and SIEM architecture is effective for monitoring, detection, and investigation.
+
+🛡️ Conclusion
+
+Week 11 successfully validated the effectiveness of the implemented network security architecture. Re-assessment and comparative analysis confirmed that the system transitioned from an unmonitored environment to a secure, monitored, and alert-driven infrastructure. This concludes the internship project with a fully functional IDS and SIEM implementation.
+
+✅ Outcome
+
+Re-assessment completed
+
+Before vs After comparison documented
+
+Alerts verified active
+
+Final evaluation completed
+
+Project marked successfully completed
