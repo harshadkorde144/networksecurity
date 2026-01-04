@@ -728,3 +728,124 @@ Incident response steps were documented.
 🧠 Conclusion
 
 Week 9 successfully demonstrated malware simulation, detection, and alerting using Splunk SIEM. This phase validated the effectiveness of centralized log analysis and alert-based incident detection, preparing the environment for forensic analysis and further security assessment.
+
+
+📘 Week 10 – Forensics Analysis & Investigation
+📌 Objective
+
+The objective of Week 10 was to perform forensic analysis on collected security logs, identify malicious or suspicious activities, reconstruct the attack timeline, and prepare an investigation report based on evidence.
+
+🖥️ Environment Details
+
+Host OS: Windows
+
+SIEM Tool: Splunk Enterprise
+
+Deployment Type: Single Instance
+
+Log Source: Windows Security, System, and Application Logs
+
+Index Used: Default (main)
+
+⚙️ Tasks Performed
+1️⃣ Identification of Malware Evidence
+
+Windows Security logs were analyzed to identify indicators of malicious activity.
+
+Search command used:
+
+index=* EventCode=4720
+
+
+EventCode 4720 confirms unauthorized user account creation.
+
+This activity is commonly associated with malware persistence techniques.
+
+2️⃣ Authentication Attack Analysis
+
+Failed authentication attempts were analyzed to detect possible brute-force behavior.
+
+Search command used:
+
+index=* EventCode=4625
+
+
+Multiple failed login attempts were observed.
+
+Repeated failures indicate credential misuse or attack attempts.
+
+3️⃣ Timeline Reconstruction
+
+To understand the sequence of events, a combined timeline analysis was performed.
+
+Search command used:
+
+index=* (EventCode=4720 OR EventCode=4625)
+
+
+Failed login attempts occurred before user creation.
+
+This sequence suggests an attack progression followed by persistence.
+
+4️⃣ Event Frequency Analysis
+
+Event frequency was analyzed to understand attack severity.
+
+Search command used:
+
+index=* (EventCode=4625 OR EventCode=4720)
+| stats count by EventCode
+
+
+Event frequency helped quantify attack attempts and impact.
+
+Failed login events were more frequent compared to user creation events.
+
+5️⃣ System Impact Verification
+
+System and application logs were reviewed to detect any abnormal behavior.
+
+Search command used:
+
+index=* (sourcetype=WinEventLog:System OR sourcetype=WinEventLog:Application)
+
+
+No major system crashes were observed.
+
+System remained stable during the simulated attack.
+
+📸 Documentation & Evidence
+
+The following forensic evidence screenshots were captured:
+
+Unauthorized user creation (EventCode 4720)
+
+Failed login attempts (EventCode 4625)
+
+Combined event timeline analysis
+
+Event frequency statistics
+
+🔍 Forensic Findings
+
+Multiple failed login attempts were detected, indicating a possible credential attack.
+
+An unauthorized user account was created after authentication failures.
+
+Timeline analysis confirmed a suspicious attack sequence.
+
+Activities are consistent with malware persistence and intrusion techniques.
+
+🛡️ Conclusion
+
+Week 10 successfully demonstrated log-based forensic investigation using Splunk SIEM. Security events were analyzed to reconstruct an attack timeline, identify indicators of compromise, and assess system impact. The findings validate the effectiveness of centralized log analysis for post-incident investigation.
+
+✅ Outcome
+
+Forensic evidence successfully collected and analyzed
+
+Attack sequence reconstructed
+
+Investigation report prepared
+
+Foundation established for final assessment and comparison
